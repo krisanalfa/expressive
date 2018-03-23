@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Expressive ({{ env() }})</title>
+
+    <link rel="icon" type="image/png" href="/logo.png">
+
+    @if(env() === 'production')
+    <link rel="stylesheet" href="{{ asset('vendor.css') }}">
+    <link rel="stylesheet" href="{{ asset('main.css') }}">
+    @endif
+  </head>
+  <body>
+    <div id="app">
+      @!section('content')
+    </div>
+
+    @if(env() === 'production')
+    <script src="{{ asset('manifest.js') }}"></script>
+    <script src="{{ asset('vendor.js') }}"></script>
+    @endif
+
+    <script src="{{ asset('main.js') }}"></script>
+  </body>
+</html>
