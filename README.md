@@ -3,6 +3,8 @@
 Expressive is an unopinionated boilerplate. It's based on Express with additional steroids, such as:
 
 - Written using [Typescript](http://www.typescriptlang.org)
+- [Body Parser](https://github.com/expressjs/body-parser)
+- [Multer](https://github.com/expressjs/multer)
 - [Edge](http://edge.adonisjs.com) view engine
 - [Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection) (using [Inversify](http://inversify.io))
 - [Webpack](https://webpack.js.org) assets management (Webpack v4)
