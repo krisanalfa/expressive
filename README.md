@@ -1,4 +1,8 @@
-# Expressive
+<p align="center">
+<img src="https://cdn.rawgit.com/travlrcom/expressive/develop/public/logo.png" data-canonical-src="https://cdn.rawgit.com/travlrcom/expressive/develop/public/logo.png" width="200" />
+<h1 align="center">Expressive</h1>
+</p>
+
 
 Expressive is an unopinionated boilerplate. It's based on Express with additional steroids, such as:
 
@@ -18,6 +22,82 @@ Expressive is an unopinionated boilerplate. It's based on Express with additiona
 - [Vue](https://vuejs.org) (Vue v2)
 - [Bootstrap v4](https://getbootstrap.com) (with [Material Design theme](http://daemonite.github.io/material/))
 - [VSCode](https://code.visualstudio.com) [debugging](https://code.visualstudio.com/docs/editor/debugging) experience
+
+# Getting Started
+
+You can simply clone this repo and start from there or use [Expressive CLI](https://github.com/travlrcom/expressive-cli) to generate your project using this boilerplate.
+
+```sh
+$ npm i -g expressive-cli
+$ expressive new my-awesome-project
+ℹ Using Expressive v0.0.1
+ℹ Downloaded
+✔ Expressive is ready on /process/getcwd/my-awesome-project
+
+Next thing you need to do:
+  - cd my-awesome-project
+  - yarn install # or you can use npm, but using yarn is recommended
+  - yarn dev     # or npm run dev
+$
+```
+
+# Documentation
+
+## Routing
+
+```
+TBD
+```
+
+## Model
+
+```
+TBD
+```
+
+## View
+
+```
+TBD
+```
+
+## Controller
+
+```
+TBD
+```
+
+## Dependency Injection
+
+```
+TBD
+```
+
+# Best Practice
+
+## Development Tools and Environment
+
+```
+TBD
+```
+
+## Assets Management
+
+```
+TBD
+```
+
+## Testing
+
+```
+TBD
+```
+
+## Dockerfile
+
+```
+TBD
+```
 
 # LICENSE
 
