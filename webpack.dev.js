@@ -4,10 +4,10 @@ const config = require('./webpack.config.js')
 
 module.exports = merge(config, {
   devtool: 'cheap-module-eval-source-map',
-  entry: [
-    'webpack-hot-middleware/client',
-    './client/main.ts'
-  ],
+  entry: {
+    main: ['./client/main.ts', 'webpack-hot-middleware/client'],
+    'pages/index': ['./client/pages/index.ts', 'webpack-hot-middleware/client']
+  },
   module: {
     rules: [
       {

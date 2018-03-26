@@ -4,7 +4,10 @@ const webpack = require('webpack')
 module.exports = {
   target: 'web',
   mode: process.env.NODE_ENV || 'development',
-  entry: './client/main.ts',
+  entry: {
+    main: './client/main.ts',
+    'pages/index': './client/pages/index.ts',
+  },
   output: {
     path: path.join(__dirname, 'public'),
     publicPath: '/',
