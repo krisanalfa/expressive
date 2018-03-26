@@ -1,0 +1,86 @@
+.masthead {
+  &-overlay {
+    position: absolute;
+    height: 100%;
+    min-height: 35rem;
+    width: 100%;
+    background-color: #757575;
+    opacity: 0.75;
+    z-index: -1;
+
+    @media (min-width: 768px) {
+      min-height: 0;
+    }
+  }
+
+  &-container {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 3rem;
+
+    .masthead-bg {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+      min-height: 35rem;
+      height: 100%;
+      background-color: #bdbdbd;
+      transform: skewY(4deg);
+      transform-origin: bottom right;
+    }
+
+    .masthead-content {
+      &--logo {
+        width: 180px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+
+        strong {
+          font-weight: 700;
+        }
+      }
+
+      .form-control:focus {
+        border-color: rgba(0, 0, 0, 0.87);
+        box-shadow: inset 0 -2px 0 -1px rgba(0, 0, 0, 0.87);
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .masthead-container {
+    height: 100%;
+    min-height: 0;
+    width: 40.5rem;
+    padding-bottom: 0;
+
+    .masthead-bg {
+      min-height: 0;
+      transform: skewX(-8deg);
+      transform-origin: top right;
+    }
+
+    .masthead-content {
+      padding-left: 3rem;
+      padding-right: 10rem;
+
+      h1 {
+        font-size: 3.5rem;
+      }
+
+      p {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}

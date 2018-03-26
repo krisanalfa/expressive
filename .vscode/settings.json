@@ -1,0 +1,9 @@
+{
+  "emmet.triggerExpansionOnTab": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.renderWhitespace": "boundary",
+  "editor.formatOnPaste": true,
+  "emmet.includeLanguages": {
+    "edge": "html"
+  }
+}
