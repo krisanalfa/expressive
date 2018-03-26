@@ -36,7 +36,7 @@ $ expressive new my-awesome-project
 
 Next thing you need to do:
   - cd my-awesome-project
-  - yarn install # or you can use npm, but using yarn is recommended
+  - yarn install # or npm install, using yarn is recommended
   - yarn dev     # or npm run dev
 $
 ```
