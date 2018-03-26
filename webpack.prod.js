@@ -1,10 +1,12 @@
 const path = require('path')
-const glob = require('glob-all')
 const webpack = require('webpack')
+const cssnano = require('cssnano')
 const merge = require('webpack-merge')
 const config = require('./webpack.config.js')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const UglifyJSWebpackPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const extractTextVendor = new ExtractTextPlugin({ filename: 'css/vendor.[hash:8].css' })
 const extractText = new ExtractTextPlugin({ filename: 'css/[name].[hash:8].css' })
@@ -29,7 +31,7 @@ module.exports = merge(config, {
         use: extractTextVendor.extract({
           fallback: 'style-loader',
           use: [
-            { loader: 'css-loader', options: { minimize: true } },
+            { loader: 'css-loader' },
             { loader: 'postcss-loader' },
             { loader: 'sass-loader' }
           ]
@@ -41,7 +43,7 @@ module.exports = merge(config, {
         use: extractText.extract({
           fallback: 'style-loader',
           use: [
-            { loader: 'css-loader', options: { minimize: true } },
+            { loader: 'css-loader' },
             { loader: 'postcss-loader' },
             { loader: 'sass-loader' }
           ]
@@ -53,20 +55,42 @@ module.exports = merge(config, {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        commons: {
+        vendor: {
           test: /(node_modules|vendor)/,
+          chunks: 'initial',
           name: 'vendor',
-          chunks: 'initial'
+          priority: 10,
+          enforce: true
         }
       }
     },
     runtimeChunk: {
       name: 'manifest'
-    }
+    },
+    minimizer: [
+      new UglifyJSWebpackPlugin({
+        sourceMap: false,
+        extractComments: { banner: false },
+        uglifyOptions: {
+          compress: { drop_console: true }
+        }
+      })
+    ],
   },
   plugins: [
     extractTextVendor,
     extractText,
-    new ManifestPlugin()
+    new OptimizeCSSAssetsPlugin({
+      cssProcessor: cssnano,
+      cssProcessorOptions: {
+        discardComments: { removeAll: true },
+        // Run cssnano in safe mode to avoid
+        // potentially unsafe transformations.
+        safe: true
+      },
+      canPrint: false
+    }),
+    new ManifestPlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin()
   ]
 })

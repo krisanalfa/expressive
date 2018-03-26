@@ -13,7 +13,7 @@ Expressive is an unopinionated boilerplate. It's based on Express with additiona
   - [Code splitting](https://webpack.js.org/guides/code-splitting/)
 - [Sequelize](https://github.com/sequelize/sequelize) + [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript)
 - Ready to use under [Docker](https://www.docker.com) environment
-  - Very small image size (~100 MB)
+  - Very small image size (~95 MB)
 - Unit test (using [Jest](https://facebook.github.io/jest/) + [Supertest](https://github.com/visionmedia/supertest))
 - [Vue](https://vuejs.org) (Vue v2)
 - [Bootstrap v4](https://getbootstrap.com) (with [Material Design theme](http://daemonite.github.io/material/))

@@ -1,6 +1,5 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { omit } from 'lodash'
 const edge = require('edge.js')
 import * as Minifier from 'html-minifier'
 import { Request, Response } from 'express'
@@ -30,6 +29,10 @@ export class View {
   private static registered: boolean
   private static loaded: boolean = false
   private static manifest: any = {}
+
+  public static extends (method: string, resolver: Function) {
+    edge.global(method, resolver)
+  }
 
   public static edge () {
     if (this.registered) return (_: Request, __: Response, next: NextFunction) => next()
@@ -92,8 +95,7 @@ export class View {
         fs.readFile(viewPath, { encoding: 'utf-8', flag: 'r' }, (err, content) => {
           if (err) return callback(err)
 
-          const data = omit(options, ['settings', '_locals', 'cache'])
-          let html = edge.renderString(content, data)
+          let html = edge.renderString(content, options)
 
           if (process.env.NODE_ENV === 'production') {
             html = Minifier.minify(html, {

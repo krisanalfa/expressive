@@ -42,8 +42,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery/dist/jquery.slim',
       jQuery: 'jquery/dist/jquery.slim',
-      'window.$': 'jquery/dist/jquery.slim',
-      'window.jQuery': 'jquery/dist/jquery.slim',
       Popper: ['popper.js', 'default']
     }),
     new webpack.EnvironmentPlugin({
