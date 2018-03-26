@@ -27,7 +27,7 @@ app
   .use(Router.all())
   .use(compression())
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   app.use(require('errorhandler')())
 
   const webpack = require('webpack')
