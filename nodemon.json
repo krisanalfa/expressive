@@ -9,5 +9,5 @@
     "node_modules",
     "src/**/*.spec.ts"
   ],
-  "exec": "ts-node ./src/server.ts"
+  "exec": "node --no-warnings node_modules/.bin/ts-node ./src/server.ts"
 }

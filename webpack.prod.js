@@ -1,17 +1,18 @@
 const path = require('path')
+const glob = require('glob-all')
 const webpack = require('webpack')
 const cssnano = require('cssnano')
 const merge = require('webpack-merge')
 const config = require('./webpack.config.js')
+const OfflinePlugin = require('offline-plugin')
+const PurifyCSSPlugin = require('purifycss-webpack')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const UglifyJSWebpackPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-const extractTextVendor = new ExtractTextPlugin({ filename: 'css/vendor.[hash:8].css' })
-const extractText = new ExtractTextPlugin({ filename: 'css/[name].[hash:8].css' })
-
-module.exports = merge(config, {
+let prodConfig = merge(config, {
   devtool: false,
   output: {
     filename: 'js/[name].[hash:8].js'
@@ -28,27 +29,33 @@ module.exports = merge(config, {
       },
       {
         test: /\.scss$/,
-        use: extractTextVendor.extract({
+        use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
             { loader: 'css-loader' },
             { loader: 'postcss-loader' },
             { loader: 'sass-loader' }
           ]
-        }),
-        include: /(node_modules|vendor)/
+        })
       },
       {
-        test: /\.scss$/,
-        use: extractText.extract({
-          fallback: 'style-loader',
-          use: [
-            { loader: 'css-loader' },
-            { loader: 'postcss-loader' },
-            { loader: 'sass-loader' }
-          ]
-        }),
-        exclude: /(node_modules|vendor)/
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[hash:8].[ext]',
+              publicPath: '/img',
+              outputPath: 'img'
+            }
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true
+            }
+          }
+        ]
       }
     ]
   },
@@ -56,10 +63,9 @@ module.exports = merge(config, {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          test: /(node_modules|vendor)/,
-          chunks: 'initial',
+          test: /(node_modules|__vendor__)/,
           name: 'vendor',
-          priority: 10,
+          chunks: 'initial',
           enforce: true
         }
       }
@@ -78,8 +84,14 @@ module.exports = merge(config, {
     ],
   },
   plugins: [
-    extractTextVendor,
-    extractText,
+    new ExtractTextPlugin('css/[name].[hash:8].css'),
+    new PurifyCSSPlugin({
+      // Give paths to parse for rules. These should be absolute!
+      paths: glob.sync([
+        path.join(__dirname, 'views/**/*.edge'),
+        path.join(__dirname, 'client/components/**/*.vue')
+      ]),
+    }),
     new OptimizeCSSAssetsPlugin({
       cssProcessor: cssnano,
       cssProcessorOptions: {
@@ -90,7 +102,36 @@ module.exports = merge(config, {
       },
       canPrint: false
     }),
-    new ManifestPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin()
-  ]
+    new OfflinePlugin({
+      minify: true,
+      dynamicUrlToDependencies: {
+        '/': [
+          ...glob.sync([
+            'public/js/**/*.js',
+            'public/css/**/*.css',
+            'public/**/*.png'
+          ])
+        ]
+      }
+    }),
+    new ManifestPlugin()
+  ],
+  performance: {
+    hints: false
+  }
 })
+
+// If not running under CI
+if (!process.env.CI_BUILD) {
+  prodConfig = merge(prodConfig, {
+    plugins: [
+      new BundleAnalyzerPlugin(),
+    ]
+  })
+} else { // If run under CI
+  prodConfig = merge(prodConfig, {
+    stats: 'none'
+  })
+}
+
+module.exports = prodConfig

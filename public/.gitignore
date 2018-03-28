@@ -1,3 +1,6 @@
-css
-js
-manifest.json
+/css
+/js
+/manifest.json
+/sw.js
+/appcache
+/img
