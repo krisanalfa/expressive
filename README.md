@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://cdn.rawgit.com/travlrcom/expressive/develop/public/logo.png" data-canonical-src="https://cdn.rawgit.com/travlrcom/expressive/develop/public/logo.png" width="200" />
+<img src="https://cdn.rawgit.com/travlrcom/expressive/master/client/img/logo.png" data-canonical-src="https://cdn.rawgit.com/travlrcom/expressive/master/client/img/logo.png" width="200" alt="Expressive" />
 <h1 align="center">Expressive</h1>
 </p>
 
@@ -15,6 +15,10 @@ Expressive is an unopinionated boilerplate. It's based on Express with additiona
   - [HMR](https://webpack.js.org/concepts/hot-module-replacement/) ready
   - [Extract text plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin)
   - [Code splitting](https://webpack.js.org/guides/code-splitting/)
+  - [Remove unused CSS](https://github.com/purifycss/purifycss)
+  - [Offline plugin](https://github.com/NekR/offline-plugin)
+  - [File loader](https://github.com/webpack-contrib/file-loader)
+  - [Bundle analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
 - [Sequelize](https://github.com/sequelize/sequelize) + [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript)
 - Ready to use under [Docker](https://www.docker.com) environment
   - Very small image size (~95 MB)
