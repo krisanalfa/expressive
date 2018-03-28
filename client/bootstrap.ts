@@ -1,5 +1,5 @@
 // Vendor
-import './scss/vendor/bootstrap.scss'
+import './scss/__vendor__/bootstrap.scss'
 import 'daemonite-material'
 
 // Custom styling

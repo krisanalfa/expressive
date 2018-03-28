@@ -21,11 +21,11 @@ app
   .use(bodyParser.urlencoded({ extended: false }))
   .use(bodyParser.json())
   .use(cookieParser())
+  .use(compression())
   .use(express.static(join(__dirname, '..', 'public')))
   .set('views', join(__dirname, '..', 'views'))
   .use(View.edge())
   .use(Router.all())
-  .use(compression())
 
 if (process.env.NODE_ENV !== 'production') {
   app.use(require('errorhandler')())

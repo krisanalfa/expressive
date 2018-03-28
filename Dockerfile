@@ -27,7 +27,7 @@ FROM dependencies AS build
 # Copy app sources
 COPY . .
 # Building...
-RUN yarn build
+RUN CI_BUILD=1 yarn build
 
 #
 # ---- Release ----

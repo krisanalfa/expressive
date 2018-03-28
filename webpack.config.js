@@ -16,7 +16,8 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      'jquery$': 'jquery/dist/jquery.slim.js'
     }
   },
   module: {
@@ -35,20 +36,17 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         exclude: /node_modules/,
-      },
+      }
     ]
   },
   plugins: [
     new webpack.ProvidePlugin({
-      $: 'jquery/dist/jquery.slim',
-      jQuery: 'jquery/dist/jquery.slim',
+      $: 'jquery',
+      jQuery: 'jquery',
       Popper: ['popper.js', 'default']
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: process.env.NODE_ENV || 'development'
     })
-  ],
-  performance: {
-    hints: false
-  }
+  ]
 }
