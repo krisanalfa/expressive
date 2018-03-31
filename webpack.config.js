@@ -23,6 +23,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+          transpileOnly: true
+        }
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -36,6 +45,19 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[hash:8].[ext]',
+              publicPath: '/img',
+              outputPath: 'img'
+            }
+          }
+        ]
       }
     ]
   },

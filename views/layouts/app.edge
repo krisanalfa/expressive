@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" {{{ env() === 'production' ? 'manifest="/appcache/manifest.appcache"' : '' }}}>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,9 +33,10 @@
   </head>
   <body>
     <noscript>
-      <div class="h-100 w-100">
-        <div class="my-auto">
-          <h3 class="text-center">Please enable Javascript to use this web.</h3>
+      <div class="d-flex w-100 h-100 justify-content-center noscript">
+        <div class="text-center align-self-center">
+          <img src="/static/img/logo.png" alt="Expressive" class="logo mb-5">
+          <h3>Please enable Javascript to use this web.</h3>
         </div>
       </div>
     </noscript>

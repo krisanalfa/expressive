@@ -10,9 +10,9 @@ Vue.use(new Components())
 
 export const app = new Vue({ el: '#app', mounted () { this.$el.style.display = '' } })
 
-if (process.env.NODE_ENV === 'production') {
-  require('offline-plugin/runtime').install()
-} else {
-  // require('offline-plugin/runtime').uninstall()
+// Required on each 'page' module to make HMR works
+// If you create a page, make sure you add below line,
+// otherwise, HMR will not working
+if (process.env.NODE_ENV !== 'production') {
   module.hot && module.hot.accept()
 }

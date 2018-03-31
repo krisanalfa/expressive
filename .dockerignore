@@ -29,4 +29,7 @@ README.md
 dist
 public/css
 public/js
+public/img
 public/manifest.json
+
+Dockerfile

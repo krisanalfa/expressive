@@ -1,7 +1,7 @@
 import site from './site'
 
 export class Router {
-  public static all () {
+  public static register () {
     return [
       site
     ]
