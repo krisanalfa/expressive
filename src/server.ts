@@ -1,9 +1,16 @@
 import { app } from './app'
+import * as http from 'http'
 import { debug } from './instances/debug'
 
 const port = process.env.PORT || 3000
-export const server = app.listen(port, () => {
-  const bound = server.address()
 
-  debug('Expressive listening at http://%s:%s', bound.address, bound.port)
-})
+http
+  .createServer(app)
+  .listen({ port }, (error: any) => {
+    if (error) {
+      debug('Cannot start app: %O', error)
+      process.exit(1)
+    }
+
+    debug('Expressive listening at http://localhost:%s', port)
+  })

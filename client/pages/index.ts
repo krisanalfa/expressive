@@ -7,4 +7,6 @@ $(document).ready(_ => {
 // Required on each 'page' module to make HMR works
 // If you create a page, make sure you add below line,
 // otherwise, HMR will not working
-module.hot && module.hot.accept()
+if (process.env.NODE_ENV !== 'production') {
+  module.hot && module.hot.accept()
+}

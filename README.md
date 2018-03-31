@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://cdn.rawgit.com/travlrcom/expressive/master/client/img/logo.png" data-canonical-src="https://cdn.rawgit.com/travlrcom/expressive/master/client/img/logo.png" width="200" alt="Expressive" />
+<img src="https://cdn.rawgit.com/travlrcom/expressive/master/public/static/img/logo.png" data-canonical-src="https://cdn.rawgit.com/travlrcom/expressive/master/public/static/img/logo.png" width="200" alt="Expressive" />
 <h1 align="center">Expressive</h1>
 </p>
 
@@ -7,21 +7,17 @@
 Expressive is an unopinionated boilerplate. It's based on Express with additional steroids, such as:
 
 - Written using [Typescript](http://www.typescriptlang.org)
-- [Body Parser](https://github.com/expressjs/body-parser)
-- [Multer](https://github.com/expressjs/multer)
 - [Edge](http://edge.adonisjs.com) view engine
 - [Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection) (using [Inversify](http://inversify.io))
 - [Webpack](https://webpack.js.org) assets management (Webpack v4)
   - [HMR](https://webpack.js.org/concepts/hot-module-replacement/) ready
   - [Extract text plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin)
-  - [Code splitting](https://webpack.js.org/guides/code-splitting/)
+  - [Vendor splitting](https://webpack.js.org/guides/code-splitting/)
   - [Remove unused CSS](https://github.com/purifycss/purifycss)
-  - [Offline plugin](https://github.com/NekR/offline-plugin)
   - [File loader](https://github.com/webpack-contrib/file-loader)
   - [Bundle analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
-- [Sequelize](https://github.com/sequelize/sequelize) + [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript)
 - Ready to use under [Docker](https://www.docker.com) environment
-  - Very small image size (~95 MB)
+  - Very small image size (~78 MB)
 - Unit test (using [Jest](https://facebook.github.io/jest/) + [Supertest](https://github.com/visionmedia/supertest))
 - [Vue](https://vuejs.org) (Vue v2)
 - [Bootstrap v4](https://getbootstrap.com) (with [Material Design theme](http://daemonite.github.io/material/))
@@ -34,7 +30,7 @@ You can simply clone this repo and start from there or use [Expressive CLI](http
 ```sh
 $ npm i -g expressive-cli
 $ expressive new my-awesome-project
-ℹ Using Expressive v0.0.1
+ℹ Using Expressive vx.x.x
 ℹ Downloaded
 ✔ Expressive is ready on /process/getcwd/my-awesome-project
 
@@ -46,6 +42,12 @@ $
 ```
 
 # Documentation
+
+## Configuration
+
+```
+TBD
+```
 
 ## Routing
 

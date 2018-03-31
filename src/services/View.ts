@@ -34,7 +34,7 @@ export class View {
     edge.global(method, resolver)
   }
 
-  public static edge () {
+  public static initialize () {
     if (this.registered) return (_: Request, __: Response, next: NextFunction) => next()
 
     this.registered = true

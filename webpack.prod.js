@@ -4,7 +4,6 @@ const webpack = require('webpack')
 const cssnano = require('cssnano')
 const merge = require('webpack-merge')
 const config = require('./webpack.config.js')
-const OfflinePlugin = require('offline-plugin')
 const PurifyCSSPlugin = require('purifycss-webpack')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -20,42 +19,15 @@ let prodConfig = merge(config, {
   module: {
     rules: [
       {
-        test: /\.ts$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
-        options: {
-          appendTsSuffixTo: [/\.vue$/]
-        }
-      },
-      {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
             { loader: 'css-loader' },
-            { loader: 'postcss-loader' },
+            { loader: 'postcss-loader', options: { remove: false } },
             { loader: 'sass-loader' }
           ]
         })
-      },
-      {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[hash:8].[ext]',
-              publicPath: '/img',
-              outputPath: 'img'
-            }
-          },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              bypassOnDebug: true
-            }
-          }
-        ]
       }
     ]
   },
@@ -102,18 +74,6 @@ let prodConfig = merge(config, {
       },
       canPrint: false
     }),
-    new OfflinePlugin({
-      minify: true,
-      dynamicUrlToDependencies: {
-        '/': [
-          ...glob.sync([
-            'public/js/**/*.js',
-            'public/css/**/*.css',
-            'public/**/*.png'
-          ])
-        ]
-      }
-    }),
     new ManifestPlugin()
   ],
   performance: {
@@ -125,7 +85,7 @@ let prodConfig = merge(config, {
 if (!process.env.CI_BUILD) {
   prodConfig = merge(prodConfig, {
     plugins: [
-      new BundleAnalyzerPlugin(),
+      new BundleAnalyzerPlugin({ openAnalyzer: false }),
     ]
   })
 } else { // If run under CI
