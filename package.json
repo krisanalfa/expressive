@@ -72,17 +72,20 @@
     "webpack-merge": "^4.1.2"
   },
   "scripts": {
-    "clean": "rimraf dist public/manifest.json public/css public/js",
+    "clean:srv": "rimraf dist",
+    "clean:client": "rimraf public/manifest.json public/css public/js public/img",
+    "clean": "npm-run-all --parallel clean:*",
     "compile:srv": "tsc",
     "compile:client": "node --no-warnings node_modules/.bin/webpack --config webpack.prod.js",
-    "watch": "nodemon",
+    "compile": "npm-run-all --parallel compile:*",
     "lint:srv": "tslint --project .",
     "lint:client": "tslint --project client",
     "lint": "npm-run-all --parallel lint:*",
-    "dev": "cross-env NODE_ENV=development DEBUG=app npm-run-all --serial clean watch",
-    "build": "cross-env NODE_ENV=production npm-run-all --serial clean --parallel compile:*",
+    "watch": "nodemon",
+    "dev": "cross-env NODE_ENV=development DEBUG=app:* npm-run-all clean watch",
+    "build": "cross-env NODE_ENV=production npm-run-all clean compile",
     "test": "cross-env NODE_ENV=production jest",
-    "start": "cross-env NODE_ENV=production DEBUG=app node dist/server.js"
+    "start": "cross-env NODE_ENV=production DEBUG=app:info node dist/server.js"
   },
   "browserslist": [
     "> 1%",

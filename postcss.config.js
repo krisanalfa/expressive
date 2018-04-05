@@ -1,6 +1,6 @@
 module.exports = {
-  plugins: process.env.NODE_ENV === 'production' ? [
+  plugins: [
     require('precss'),
     require('autoprefixer')
-  ] : []
+  ]
 }

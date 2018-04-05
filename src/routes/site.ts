@@ -2,8 +2,8 @@ import { Router } from 'express'
 import { uses } from './../lib/helpers'
 import { SiteController } from '../controllers/SiteController'
 
-const siteRouter = Router()
+const router = Router()
 
-siteRouter.get('/', uses<SiteController>('SiteController@index'))
+router.get('/', uses<SiteController>('SiteController@index'))
 
-export default siteRouter
+export default router

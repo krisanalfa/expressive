@@ -2,8 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 const edge = require('edge.js')
 import * as Minifier from 'html-minifier'
-import { Request, Response } from 'express'
-import { NextFunction } from 'express-serve-static-core'
+import { Request, Response, NextFunction } from 'express'
 
 interface RenderFunction {
   (view: string, options?: Object, callback?: (err: Error, html: string) => void): void
@@ -79,7 +78,7 @@ export class View {
       */
       const render = res.render
       const expressRenderFunction: RenderFunction = (view, options, callback) => {
-        render.call(res, view.replace('.', '/'), options, callback)
+        render.call(res, view.replace(/\./g, '/'), options, callback)
       }
 
       res.render = expressRenderFunction
