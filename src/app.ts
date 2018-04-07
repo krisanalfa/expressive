@@ -14,7 +14,7 @@ export const app = express()
 app.set('views', path.join(__dirname, '..', 'views'))
 
 app
-  .use(logger(process.env.NODE_ENV === 'development' ? 'dev' : 'common'))
+  .use(logger(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'))
   .use(compression())
   .use(express.static(path.join(__dirname, '..', 'public')))
   .use(View.initialize())

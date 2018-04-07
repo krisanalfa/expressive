@@ -82,7 +82,7 @@
     "dev": "cross-env NODE_ENV=development DEBUG=app npm-run-all --serial clean watch",
     "build": "cross-env NODE_ENV=production npm-run-all --serial clean --parallel compile:*",
     "test": "cross-env NODE_ENV=production jest",
-    "start": "cross-env NODE_ENV=production DEBUG=app node dist/server.js"
+    "start": "cross-env NODE_ENV=production node dist/server.js"
   },
   "browserslist": [
     "> 1%",
