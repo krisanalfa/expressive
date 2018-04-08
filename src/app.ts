@@ -14,7 +14,7 @@ export const app = express()
 app.set('views', path.join(__dirname, '..', 'views'))
 
 app
-  .use(logger(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'))
+  .use(logger(process.env.NODE_ENV === 'development' ? 'dev' : ':req[x-forwarded-for] - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'))
   .use(compression())
   .use(express.static(path.join(__dirname, '..', 'public')))
   .use(View.initialize())

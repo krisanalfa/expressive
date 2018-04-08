@@ -11,7 +11,7 @@ pipeline:
     image: peloton/drone-rancher
     url: https://rancher.travlrdev.com
     secrets: [ rancher_access_key, rancher_secret_key ]
-    service: expressive/expressive
+    service: services/expressive
     docker_image: 409735724746.dkr.ecr.ap-southeast-2.amazonaws.com/expressive:${DRONE_COMMIT_SHA:0:8}
     confirm: true
     timeout: 180
