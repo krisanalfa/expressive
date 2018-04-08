@@ -13,8 +13,19 @@ export const app = express()
 
 app.set('views', path.join(__dirname, '..', 'views'))
 
+logger.token('ip', (req, _, __) => {
+  const ips = req.headers['x-forwarded-for']
+  const ip = (ips instanceof Array) ? ips.shift() : (
+    (typeof ips === 'string') ? ips.split(',').shift() : undefined
+  )
+
+  return ip || req.ip ||
+    (req.connection && req.connection.remoteAddress) ||
+    ''
+})
+
 app
-  .use(logger(process.env.NODE_ENV === 'development' ? 'dev' : ':req[x-forwarded-for] - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'))
+  .use(logger(process.env.NODE_ENV === 'development' ? 'dev' : ':ip - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'))
   .use(compression())
   .use(express.static(path.join(__dirname, '..', 'public')))
   .use(View.initialize())
