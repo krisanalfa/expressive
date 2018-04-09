@@ -24,14 +24,22 @@ logger.token('ip', (req, _, __) => {
     ''
 })
 
+logger.token('custom-referrer', (req, _, __) => {
+  let referer = req.headers['referer'] || req.headers['referrer']
+
+  if (referer instanceof Array) referer = referer.shift()
+
+  return (referer === '-') ? 'N/A' : (referer || 'N/A')
+})
+
 app
-  .use(logger(':ip - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"', {
+  .use(logger(':ip - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":custom-referrer" ":user-agent"', {
     skip: (req: express.Request, _) => req.headers['user-agent'] === 'ELB-HealthChecker/2.0'
   }))
-  .use(compression())
-  .use(express.static(path.join(__dirname, '..', 'public')))
   .use(View.initialize())
   .use(Router.register())
+  .use(compression())
+  .use(express.static(path.join(__dirname, '..', 'public')))
 
 if (process.env.NODE_ENV !== 'production') {
   app.use(require('errorhandler')())
