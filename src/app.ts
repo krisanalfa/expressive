@@ -25,7 +25,9 @@ logger.token('ip', (req, _, __) => {
 })
 
 app
-  .use(logger(process.env.NODE_ENV === 'development' ? 'dev' : ':ip - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'))
+  .use(logger(':ip - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"', {
+    skip: (req: express.Request, _) => req.headers['user-agent'] === 'ELB-HealthChecker/2.0'
+  }))
   .use(compression())
   .use(express.static(path.join(__dirname, '..', 'public')))
   .use(View.initialize())
